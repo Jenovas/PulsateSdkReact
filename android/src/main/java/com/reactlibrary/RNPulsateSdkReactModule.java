@@ -28,7 +28,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
      * Sets the Authorization Data for the app. Authorization Data is later used in API Requests.
      */
     @ReactMethod
-    void setAuthorizationData(String APP_ID, String APP_KEY, String GCM_APP_ID) {
+    public void setAuthorizationData(String APP_ID, String APP_KEY, String GCM_APP_ID) {
         pulsateManager = PulsateFactory.getInstance(new AuthorizationData(APP_ID, APP_KEY, GCM_APP_ID));
     }
 
@@ -37,7 +37,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
      * Session starts when the app enters foreground and ends when it goes to background.
      */
     @ReactMethod
-    void startPulsateSession(Callback successCallback, Callback errorCallback) {
+    public void startPulsateSession(Callback successCallback, Callback errorCallback) {
         pulsateManager.startPulsateSession(new IPulsateRequestListener() {
             @Override
             public void onSucess() {
@@ -58,7 +58,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
      * @param alias
      */
     @ReactMethod
-    void startPulsateSessionForAlias(String alias, Callback successCallback, Callback errorCallback) {
+    public void startPulsateSessionForAlias(String alias, Callback successCallback, Callback errorCallback) {
         pulsateManager.startPulsateSessionForAlias(alias, new IPulsateRequestListener() {
             @Override
             public void onSucess() {

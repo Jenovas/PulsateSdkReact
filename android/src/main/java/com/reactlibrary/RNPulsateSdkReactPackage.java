@@ -13,7 +13,9 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class RNPulsateSdkReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNPulsateSdkReactModule(reactContext));
+      List<NativeModule> modules = new ArrayList<>();
+      modules.add(new RNPulsateSdkReactModule(reactContext));
+      return modules;
     }
 
     // Deprecated from RN 0.47

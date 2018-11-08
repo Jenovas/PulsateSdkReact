@@ -28,8 +28,8 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
      * Sets the Authorization Data for the app. Authorization Data is later used in API Requests.
      */
     @ReactMethod
-    public void setAuthorizationData(String APP_ID, String APP_KEY, String GCM_APP_ID) {
-        pulsateManager = PulsateFactory.getInstance(new AuthorizationData(APP_ID, APP_KEY, GCM_APP_ID));
+    public void setAuthorizationData(String appid, String appkey, String gcmid) {
+        pulsateManager = PulsateFactory.getInstance(new AuthorizationData(appid, appkey, gcmid));
     }
 
     /**

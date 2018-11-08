@@ -8,8 +8,8 @@ declare module 'react-native-pulsate-sdk-react' {
     interface PulsateManager {
         Pulsate: {
             setAuthorizationData(appid: string, appkey: string, gcmid: string): void;
-            startPulsateSession(successCallback: callback, errorCallback: callback): void;
-            startPulsateSessionForAlias(alias: string, successCallback: callback, errorCallback: callback): void;
+            startPulsateSession(successCallback: () => string, errorCallback: () => string): void;
+            startPulsateSessionForAlias(alias: string, successCallback: () => string, errorCallback: () => string): void;
         }        
     }
 

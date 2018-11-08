@@ -43,8 +43,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.pulsatehq.sdk:PulsateSdk:2.13.8'
+    compile 'com.facebook.react:react-native:+'
+    compile 'com.android.support:multidex:1.0.3'
+    compile 'com.pulsatehq.sdk:PulsateSdk:2.13.8'
 }
   

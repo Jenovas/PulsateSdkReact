@@ -10,10 +10,10 @@ export const Pulsate = {
     setAuthorizationData: function (appid: string, appkey: string, gcmid: string) {
         RNPulsateSdkReact.setAuthorizationData(appid, appkey, gcmid);
     },
-    startPulsateSession: function (successCallback: callback, errorCallback: callback) {
+    startPulsateSession: function (successCallback: () => string, errorCallback: () => string) {
         RNPulsateSdkReact.startPulsateSession(successCallback, errorCallback);
     },
-    startPulsateSessionForAlias: function (alias: string, successCallback: callback, errorCallback: callback) {
+    startPulsateSessionForAlias: function (alias: string, successCallback: () => string, errorCallback: () => string) {
         RNPulsateSdkReact.startPulsateSessionForAlias(alias, successCallback, errorCallback);
     },
 };

@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
 
 
   s.dependency "React"
+  s.dependency 'PULPulsate'
   #s.dependency "others"
 
 end

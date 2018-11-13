@@ -10,7 +10,7 @@ RCT_EXPORT_MODULE();
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_METHOD(setAuthorizationData:(NSString *)appid appKey:(NSString *)appKey)
+RCT_EXPORT_METHOD(setAuthorizationData:(NSString *)appid appKey:(NSString *)appKey gcmId:(NSString *)gcmId)
 {
     PULAuthorizationData* authData = [[PULAuthorizationData alloc] initWithAppId:appid andAppKey:appKey validationError:nil];
     PULPulsateManager* manager = [PULPulsateFactory getInstanceWithAuthorizationData:authData withLocationEnabled:YES withPushEnabled:YES withLaunchOptions:nil withPulsateAppDelegate:YES andPulsateNotificationDelegate:YES error:nil];

@@ -149,7 +149,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile 'com.android.support:multidex:1.0.3'
-    //compile 'com.pulsatehq.sdk:PulsateSdk:2.13.8'
     compile project(':react-native-pulsate-sdk-react')
 }
 

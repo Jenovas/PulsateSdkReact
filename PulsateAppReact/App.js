@@ -15,6 +15,7 @@ var { Pulsate } = PulsateManager;
 
 export default class App extends React.Component {
   _onPress() {
+    //Pulsate.setAuthData("", "", "");
     Pulsate.setAuthData("d34a4374a9b21fa69c092493c55db142da25285ce154244cdd26958a32b08cd3", "a656a8e295ecb4732f514542718fe615efe852a0853e906158fe8db76f27fbb5", "164686352256");
     Pulsate.startPulsateSession( (msg) => {console.log(msg)}, (err) => {console.log(err)} );
   }

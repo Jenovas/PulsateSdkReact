@@ -4,16 +4,16 @@
 // @flow
 
 import { NativeModules, Platform } from 'react-native';
-const RNPulsateSdkReact = NativeModules;
+const RNPulsateSdkReact = NativeModules.RNPulsateSdkReact;
 
 export const Pulsate = {
-    setAuthData: function (appid: string, appkey: string, gcmid: string) {
+    setAuthData: function (appid, appkey, gcmid) {
         RNPulsateSdkReact.setAuthData(appid, appkey, gcmid);
     },
-    startPulsateSession: function (successCallback: () => string, errorCallback: () => string) {
+    startPulsateSession: function (successCallback, errorCallback) {
         RNPulsateSdkReact.startPulsateSession(successCallback, errorCallback);
     },
-    startPulsateSessionForAlias: function (alias: string, successCallback: () => string, errorCallback: () => string) {
+    startPulsateSessionForAlias: function (alias, successCallback, errorCallback) {
         RNPulsateSdkReact.startPulsateSessionForAlias(alias, successCallback, errorCallback);
     },
 };

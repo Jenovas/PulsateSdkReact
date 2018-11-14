@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNPulsateSdkReact"
-  s.version      = "1.0.18"
+  s.version      = "1.0.19"
   s.summary      = "RNPulsateSdkReact"
   s.description  = <<-DESC
                   RNPulsateSdkReact

@@ -36,7 +36,7 @@ RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback on
 RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-    [manager startPulsateSessionForAlias:a withListener:^(BOOL success, NSError * _Nullable error) {
+    [manager startPulsateSessionForAlias:alias withListener:^(BOOL success, NSError * _Nullable error) {
         if (success) {
             successCallback("SUCCESS");
         } else {
@@ -48,161 +48,183 @@ RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTRes
 RCT_EXPORT_METHOD(logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager logout:^(BOOL success, NSError * _Nullable error) {
+        if (success) {
+            successCallback("SUCCESS");
+        } else {
+            errorCallback("ERROR");
+        }
+    }];
 }
 
 RCT_EXPORT_METHOD(setNewThreadButtonEnabled:(BOOL)buttonEnabled)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager setNewThreadButtonEnabled:buttonEnabled]
 }
 
 RCT_EXPORT_METHOD(sendLocationWithBeaconEvents:(BOOL)sendLocation)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager sendLocationWithBeaconEvents:sendLocation];
 }
 
 RCT_EXPORT_METHOD(setLocationUpdatesEnabled:(BOOL)enabled)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager setLocationUpdatesEnabled:enabled];
 }
 
 RCT_EXPORT_METHOD(setInAppNotificationEnabled:(BOOL)enabled)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager enableInAppNotification:enabled];
 }
 
 RCT_EXPORT_METHOD(showLastInAppNotification)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager showLastInAppNotification];
 }
 
 RCT_EXPORT_METHOD(setPushNotificationEnabled:(BOOL)enabled)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager setPushNotificationEnabled:enabled];
 }
 
 RCT_EXPORT_METHOD(isPushNotificationEnabled:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    if ([manager isPushNotificationEnabled]) {
+        successCallback("SUCCESS");
+    } else {
+        errorCallback("ERROR");
+    }
 }
 
 RCT_EXPORT_METHOD(setUserAuthorized:(BOOL)authorized)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager setUserAuthorized:enabled];
 }
 
-RCT_EXPORT_METHOD(isUserAuthorized:(RCTResponseSenderBlock)successCallback)
+RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    if ([manager isUserAuthorized]) {
+        successCallback("SUCCESS");
+    } else {
+        errorCallback("ERROR");
+    }
 }
 
 RCT_EXPORT_METHOD(showLastUnauthorizedMessage)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-}
-
-RCT_EXPORT_METHOD(setUserUnauthorizedListener:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager showLastUnauthorizedMessage];
 }
 
 RCT_EXPORT_METHOD(updateFirstName:(NSString*)firstName)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager updateFirstName:firstName];
 }
 
 RCT_EXPORT_METHOD(updateLastName:(NSString*)lastName)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager updateLastName:lastName];
 }
 
 RCT_EXPORT_METHOD(updateEmail:(NSString*)email)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager updateEmail:email];
 }
 
 RCT_EXPORT_METHOD(updateGender:(NSInteger)gender)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager updateGender:gender];
 }
 
 RCT_EXPORT_METHOD(updateAge:(NSString*)age)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager updateAge:age];
 }
 
 RCT_EXPORT_METHOD(setPrivacy:(NSInteger)privacy)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager setPrivacy:privacy];
 }
 
-RCT_EXPORT_METHOD(createAttribute:(NSString*)propertyName withString:(NSString *)value)
+RCT_EXPORT_METHOD(createAttributeWithString:(NSString*)attributeName value:(NSString *)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createAttribute:attributeName withString:value];
 }
 
-RCT_EXPORT_METHOD(createAttribute:(NSString*)propertyName withFloat:(CGFloat)number)
+RCT_EXPORT_METHOD(createAttributeWithFloat:(NSString*)attributeName value:(CGFloat)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createAttribute:attributeName withFloat:value];
 }
 
-RCT_EXPORT_METHOD(createAttribute:(NSString*)propertyName withInteger:(NSInteger)number)
+RCT_EXPORT_METHOD(createAttributeWithInt:(NSString*)attributeName value:(NSInteger)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createAttribute:attributeName withInteger:value];
 }
 
-RCT_EXPORT_METHOD(createAttribute:(NSString*)propertyName withBoolean:(BOOL)boolean)
+RCT_EXPORT_METHOD(createAttributeWithBool:(NSString*)attributeName value:(BOOL)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createAttribute:attributeName withBoolean:value];
 }
 
-RCT_EXPORT_METHOD(createAttribute:(NSString*)propertyName withDate:(NSDate*)date)
+RCT_EXPORT_METHOD(createAttributeWithDate:(NSString*)attributeName value:(NSDate*)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createAttribute:attributeName withDate:value];
 }
 
-RCT_EXPORT_METHOD(incrementIntegerAttribute:(NSString*)attributeName withInteger:(NSInteger)value)
+RCT_EXPORT_METHOD(incrementCounter:(NSString*)counterName withInteger:(NSInteger)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager incrementIntegerAttribute:counterName withInteger:value];
 }
 
-RCT_EXPORT_METHOD(decrementIntegerAttribute:(NSString*)attributeName withInteger:(NSInteger)value)
+RCT_EXPORT_METHOD(decrementCounter:(NSString*)counterName withInteger:(NSInteger)value)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-}
-
-RCT_EXPORT_METHOD(incrementFloatAttribute:(NSString*)attributeName withFloat:(CGFloat)value)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-}
-
-RCT_EXPORT_METHOD(decrementFloatAttribute:(NSString*)attributeName withFloat:(CGFloat)value)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager decrementIntegerAttribute:counterName withInteger:value];
 }
 
 RCT_EXPORT_METHOD(createEvent:(NSString*)eventName)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager createEvent:eventName];
 }
 
 RCT_EXPORT_METHOD(forceAttributeSync)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager forceAttributeSync];
 }
 
-RCT_EXPORT_METHOD(startLocation)
+RCT_EXPORT_METHOD(startLocationIOS)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager startLocation];
 }
 
-RCT_EXPORT_METHOD(startRemoteNotifications)
+RCT_EXPORT_METHOD(startRemoteNotificationsIOS)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-}
-
-RCT_EXPORT_METHOD(startRemoteNotifications)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager startRemoteNotifications];
 }
 
 RCT_EXPORT_METHOD(showFeed)
@@ -215,8 +237,9 @@ RCT_EXPORT_METHOD(showFeed)
     });
 }
 
-RCT_EXPORT_METHOD(getBadgeCount:(RCTResponseSenderBlock)successCallback)
+RCT_EXPORT_METHOD(getBadgeCountIOS)
 {
-    PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager getBadgeCount];
 }
 @end

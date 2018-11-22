@@ -5,49 +5,47 @@
 */
 
 declare module 'react-native-pulsate-sdk-react' {
+    type integer = number;
+    type float = number;
+
     interface PulsateManager {
         Pulsate: {
             setAuthData(appid: string, appkey: string, gcmid: string): void;
             startPulsateSession(successCallback: () => string, errorCallback: () => string): void;
             startPulsateSessionForAlias(alias: string, successCallback: () => string, errorCallback: () => string): void;
-            getDeviceGuid((RCTResponseSenderBlock)successCallback);
-            setAuthData:(NSString *)appid appkey:(NSString *)appkey gcmid:(NSString *)gcmid;
-            startPulsateSession:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-            startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-            logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-            setNewThreadButtonEnabled:(BOOL)buttonEnabled)
-            sendLocationWithBeaconEvents:(BOOL)sendLocation)
-            setLocationUpdatesEnabled:(BOOL)enabled)
-            setInAppNotificationEnabled:(BOOL)enabled)
-            showLastInAppNotification)
-            setPushNotificationEnabled:(BOOL)enabled)
-            isPushNotificationEnabled:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-            setUserAuthorized:(BOOL)authorized)
-            isUserAuthorized:(RCTResponseSenderBlock)successCallback)
-            showLastUnauthorizedMessage)
-            setUserUnauthorizedListener:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-            updateFirstName:(NSString*)firstName)
-            updateLastName:(NSString*)lastName)
-            updateEmail:(NSString*)email)
-            updateGender:(NSInteger)gender)
-            updateAge:(NSString*)age)
-            setPrivacy:(NSInteger)privacy)
-            createAttribute:(NSString*)propertyName withString:(NSString *)value)
-            createAttribute:(NSString*)propertyName withFloat:(CGFloat)number)
-            createAttribute:(NSString*)propertyName withInteger:(NSInteger)number)
-            createAttribute:(NSString*)propertyName withBoolean:(BOOL)boolean)
-            createAttribute:(NSString*)propertyName withDate:(NSDate*)date)
-            incrementIntegerAttribute:(NSString*)attributeName withInteger:(NSInteger)value)
-            decrementIntegerAttribute:(NSString*)attributeName withInteger:(NSInteger)value)
-            incrementFloatAttribute:(NSString*)attributeName withFloat:(CGFloat)value)
-            decrementFloatAttribute:(NSString*)attributeName withFloat:(CGFloat)value)
-            createEvent:(NSString*)eventName)
-            forceAttributeSync)
-            startLocation)
-            startRemoteNotifications)
-            startRemoteNotifications)
-            showFeed());
-            getBadgeCount:(RCTResponseSenderBlock)successCallback);
+            logoutCurrentAlias(successCallback: () => string, errorCallback: () => string): void;
+            setNewThreadButtonEnabled(buttonEnabled: boolean): void;
+            sendLocationWithBeaconEvents(sendLocation: boolean): void;
+            setLocationUpdatesEnabled(enabled: boolean): void;
+            setInAppNotificationEnabled(enabled: boolean): void;
+            showLastInAppNotification(): void;
+            setPushNotificationEnabled(enabled: boolean): void;
+            isPushNotificationEnabled(successCallback: () => string, errorCallback: () => string): void;
+            setUserAuthorized(authorized: boolean): void;
+            showLastUnauthorizedMessage(): void;
+            setUserUnauthorizedListener(successCallback: () => string): void;
+            updateFirstName(firstName: string): void;
+            updateLastName(lastName: string): void;
+            updateEmail(email: string): void;
+            updateGender(gender: integer): void;
+            updateAge(age: string): void;
+            setPrivacy(privacy: integer): void;
+            createAttributeWithString(attributeName: string, value: string): void;
+            createAttributeWithFloat(attributeName: string, value: float): void;
+            createAttributeWithInt(attributeName: string, value: integer): void;
+            createAttributeWithBool(attributeName: string, value: boolean): void;
+            createAttributeWithDate(attributeName: string, value: Date): void;
+            incrementCounter(counterName: string, value: integer): void;
+            decrementCounter(counterName: string, value: integer): void;
+            createEvent(eventName: string): void;
+            forceAttributeSync(): void;
+            showFeed(): void;
+
+            isUserAuthorizedIOS(successCallback: () => string, errorCallback: () => string): void;
+            getDeviceGuidIOS(successCallback: () => string): void;
+            startLocationIOS(): void;
+            startRemoteNotificationsIOS(): void;
+            getBadgeCountIOS(): void;
         }        
     }
 

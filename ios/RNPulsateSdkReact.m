@@ -10,11 +10,6 @@ RCT_EXPORT_MODULE();
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_METHOD(getDeviceGuid:(RCTResponseSenderBlock)successCallback)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-}
-
 RCT_EXPORT_METHOD(setAuthData:(NSString *)appid appkey:(NSString *)appkey gcmid:(NSString *)gcmid)
 {
     PULAuthorizationData* authData = [[PULAuthorizationData alloc] initWithAppId:appid andAppKey:appkey validationError:nil];
@@ -107,16 +102,6 @@ RCT_EXPORT_METHOD(setUserAuthorized:(BOOL)authorized)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager setUserAuthorized:authorized];
-}
-
-RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
-{
-    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-    if ([manager isUserAuthorized]) {
-        successCallback(@"SUCCESS");
-    } else {
-        errorCallback(@"ERROR");
-    }
 }
 
 RCT_EXPORT_METHOD(showLastUnauthorizedMessage)
@@ -215,6 +200,30 @@ RCT_EXPORT_METHOD(forceAttributeSync)
     [manager forceAttributeSync];
 }
 
+RCT_EXPORT_METHOD(showFeed)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
+        UINavigationController* controller = [man getFeedNavigationController];
+        [[[UIApplication sharedApplication] delegate].window.rootViewController presentViewController:controller animated:NO completion:nil];
+    });
+}
+
+RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    if ([manager isUserAuthorized]) {
+        successCallback(@"SUCCESS");
+    } else {
+        errorCallback(@"ERROR");
+    }
+}
+
+RCT_EXPORT_METHOD(getDeviceGuidIOS:(RCTResponseSenderBlock)successCallback)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+}
+
 RCT_EXPORT_METHOD(startLocationIOS)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
@@ -225,15 +234,6 @@ RCT_EXPORT_METHOD(startRemoteNotificationsIOS)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startRemoteNotifications];
-}
-
-RCT_EXPORT_METHOD(showFeed)
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
-        UINavigationController* controller = [man getFeedNavigationController];
-        [[[UIApplication sharedApplication] delegate].window.rootViewController presentViewController:controller animated:NO completion:nil];
-    });
 }
 
 RCT_EXPORT_METHOD(getBadgeCountIOS)

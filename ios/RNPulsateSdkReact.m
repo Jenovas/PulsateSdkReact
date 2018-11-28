@@ -26,9 +26,9 @@ RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback on
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSession:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            successCallback("SUCCESS");
+            successCallback(@"SUCCESS");
         } else {
-            errorCallback("ERROR");
+            errorCallback(@"ERROR");
         }
     }]
 }
@@ -38,9 +38,9 @@ RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTRes
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSessionForAlias:alias withListener:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            successCallback("SUCCESS");
+            successCallback(@"SUCCESS");
         } else {
-            errorCallback("ERROR");
+            errorCallback(@"ERROR");
         }
     }];
 }
@@ -50,9 +50,9 @@ RCT_EXPORT_METHOD(logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onE
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager logout:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            successCallback("SUCCESS");
+            successCallback(@"SUCCESS");
         } else {
-            errorCallback("ERROR");
+            errorCallback(@"ERROR");
         }
     }];
 }
@@ -97,9 +97,9 @@ RCT_EXPORT_METHOD(isPushNotificationEnabled:(RCTResponseSenderBlock)successCallb
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     if ([manager isPushNotificationEnabled]) {
-        successCallback("SUCCESS");
+        successCallback(@"SUCCESS");
     } else {
-        errorCallback("ERROR");
+        errorCallback(@"ERROR");
     }
 }
 
@@ -113,9 +113,9 @@ RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback on
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     if ([manager isUserAuthorized]) {
-        successCallback("SUCCESS");
+        successCallback(@"SUCCESS");
     } else {
-        errorCallback("ERROR");
+        errorCallback(@"ERROR");
     }
 }
 

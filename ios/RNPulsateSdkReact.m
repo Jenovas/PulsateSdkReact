@@ -30,7 +30,7 @@ RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback on
         } else {
             errorCallback(@"ERROR");
         }
-    }]
+    }];
 }
 
 RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
@@ -60,7 +60,7 @@ RCT_EXPORT_METHOD(logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onE
 RCT_EXPORT_METHOD(setNewThreadButtonEnabled:(BOOL)buttonEnabled)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-    [manager setNewThreadButtonEnabled:buttonEnabled]
+    [manager setNewThreadButtonEnabled:buttonEnabled];
 }
 
 RCT_EXPORT_METHOD(sendLocationWithBeaconEvents:(BOOL)sendLocation)
@@ -106,7 +106,7 @@ RCT_EXPORT_METHOD(isPushNotificationEnabled:(RCTResponseSenderBlock)successCallb
 RCT_EXPORT_METHOD(setUserAuthorized:(BOOL)authorized)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-    [manager setUserAuthorized:enabled];
+    [manager setUserAuthorized:authorized];
 }
 
 RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
@@ -232,8 +232,7 @@ RCT_EXPORT_METHOD(showFeed)
     dispatch_async(dispatch_get_main_queue(), ^{
         PULPulsateManager* man = [PULPulsateFactory getDefaultInstance];
         UINavigationController* controller = [man getFeedNavigationController];
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [delegate.window.rootViewController presentViewController:controller animated:NO completion:nil];
+        [[[UIApplication sharedApplication] delegate].window.rootViewController presentViewController:controller animated:NO completion:nil];
     });
 }
 

@@ -18,7 +18,7 @@ RCT_EXPORT_METHOD(setAuthData:(NSString *)appid appkey:(NSString *)appkey gcmid:
 
 RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
-    bool wasCalled = NO;
+    __block BOOL wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSession:^(BOOL success, NSError * _Nullable error) {
         if (success) {
@@ -37,7 +37,7 @@ RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback on
 
 RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
-    bool wasCalled = NO;
+    __block BOOL wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSessionForAlias:alias withListener:^(BOOL success, NSError * _Nullable error) {
         if (success) {
@@ -56,7 +56,7 @@ RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTRes
 
 RCT_EXPORT_METHOD(logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
-    bool wasCalled = NO;
+    __block BOOL wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager logout:^(BOOL success, NSError * _Nullable error) {
         if (success) {

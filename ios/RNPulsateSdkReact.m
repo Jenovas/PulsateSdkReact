@@ -18,19 +18,18 @@ RCT_EXPORT_METHOD(setAuthData:(NSString *)appid appkey:(NSString *)appkey gcmid:
 
 RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
+    bool wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSession:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 successCallback(@"SUCCESS");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         } else {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 errorCallback(@"ERROR");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         }
     }];
@@ -38,19 +37,18 @@ RCT_EXPORT_METHOD(startPulsateSession:(RCTResponseSenderBlock)successCallback on
 
 RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
+    bool wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager startPulsateSessionForAlias:alias withListener:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 successCallback(@"SUCCESS");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         } else {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 errorCallback(@"ERROR");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         }
     }];
@@ -58,19 +56,18 @@ RCT_EXPORT_METHOD(startPulsateSessionForAlias:(NSString*)alias onSuccess:(RCTRes
 
 RCT_EXPORT_METHOD(logoutCurrentAlias:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
+    bool wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager logout:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 successCallback(@"SUCCESS");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         } else {
-            if (successCallback != nil && errorCallback != nil) {
+            if (wasCalled == NO) {
                 errorCallback(@"ERROR");
-                successCallback = nil;
-                errorCallback = nil;
+                wasCalled = YES;
             }
         }
     }];

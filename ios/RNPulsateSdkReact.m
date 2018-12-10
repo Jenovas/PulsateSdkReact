@@ -111,11 +111,18 @@ RCT_EXPORT_METHOD(setPushNotificationEnabled:(BOOL)enabled)
 
 RCT_EXPORT_METHOD(isPushNotificationEnabled:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
+    __block BOOL wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     if ([manager isPushNotificationEnabled]) {
-        successCallback(@"SUCCESS");
+        if (wasCalled == NO) {
+            successCallback(@"SUCCESS");
+            wasCalled = YES;
+        }
     } else {
-        errorCallback(@"ERROR");
+        if (wasCalled == NO) {
+            errorCallback(@"ERROR");
+            wasCalled = YES;
+        }
     }
 }
 
@@ -244,9 +251,15 @@ RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback on
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     if ([manager isUserAuthorized]) {
-        successCallback(@"SUCCESS");
+        if (wasCalled == NO) {
+            successCallback(@"SUCCESS");
+            wasCalled = YES;
+        }
     } else {
-        errorCallback(@"ERROR");
+        if (wasCalled == NO) {
+            errorCallback(@"ERROR");
+            wasCalled = YES;
+        }
     }
 }
 

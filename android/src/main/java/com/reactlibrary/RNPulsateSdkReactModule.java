@@ -35,45 +35,66 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startPulsateSession(Callback successCallback, Callback errorCallback) {
+        boolean wasCalled = false;
         pulsateManager.startPulsateSession(new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                successCallback.invoke("Successfully started session");
+                if (!wasCalled) {
+                    wasCalled = true;
+                    successCallback.invoke("Successfully started session");
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                errorCallback.invoke(e.getMessage());
+                if (!wasCalled) {
+                    wasCalled = true;
+                    errorCallback.invoke(e.getMessage());
+                }  
             }
         });
     }
 
     @ReactMethod
     public void startPulsateSessionForAlias(String alias, Callback successCallback, Callback errorCallback) {
+        boolean wasCalled = false;
         pulsateManager.startPulsateSessionForAlias(alias, new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                successCallback.invoke("Successfully started session");
+                if (!wasCalled) {
+                    wasCalled = true;
+                    successCallback.invoke("Successfully started session");
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                errorCallback.invoke(e.getMessage());
+                if (!wasCalled) {
+                    wasCalled = true;
+                    errorCallback.invoke(e.getMessage());
+                }  
             }
         });
     }
 
     @ReactMethod
     public void logoutCurrentAlias(Callback successCallback, Callback errorCallback) {
+        boolean wasCalled = false;
         pulsateManager.logoutCurrentAlias(new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                successCallback.invoke("Successfully started session");
+                if (!wasCalled) {
+                    wasCalled = true;
+                    successCallback.invoke("Successfully logged out");
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                errorCallback.invoke(e.getMessage());
+                if (!wasCalled) {
+                    wasCalled = true;
+                    errorCallback.invoke(e.getMessage());
+                }  
             }
         });
     }
@@ -110,10 +131,17 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     void isPushNotificationEnabled(Callback successCallback, Callback errorCallback) {
+        boolean wasCalled = false;
         if (pulsateManager.isPushNotificationEnabled()) {
-            successCallback.invoke("ENABLED");
+            if (!wasCalled) {
+                wasCalled = true;
+                successCallback.invoke("ENABLED");
+            }
         } else {
-            errorCallback.invoke("DISABLED");
+            if (!wasCalled) {
+                wasCalled = true;
+                errorCallback.invoke("DISABLED");
+            }
         }
     }
 
@@ -209,20 +237,28 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setUserUnauthorizedListenerAndroid(Callback successCallback) {
+        boolean wasCalled = false;
         pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
             @Override
             public void onUnauthorizedAction() {
-                successCallback.invoke("UNAUTHORIZED ACTION");
+                if (!wasCalled) {
+                    wasCalled = true;
+                    successCallback.invoke("UNAUTHORIZED ACTION");
+                }
             }
         });
     }
 
     @ReactMethod
     public void setUnreadCountUpdateListenerAndroid(Callback successCallback) {
+        boolean wasCalled = false;
         pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {
             @Override
             public void onUnreadCountUpdate(int unread) {
-                successCallback.invoke(""+unread);
+                if (!wasCalled) {
+                    wasCalled = true;
+                    successCallback.invoke(""+unread);
+                }
             }
         });
     }

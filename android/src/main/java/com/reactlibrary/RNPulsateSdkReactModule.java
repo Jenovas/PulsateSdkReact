@@ -35,20 +35,20 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startPulsateSession(Callback successCallback, Callback errorCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         pulsateManager.startPulsateSession(new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     successCallback.invoke("Successfully started session");
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     errorCallback.invoke(e.getMessage());
                 }  
             }
@@ -57,20 +57,20 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startPulsateSessionForAlias(String alias, Callback successCallback, Callback errorCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         pulsateManager.startPulsateSessionForAlias(alias, new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     successCallback.invoke("Successfully started session");
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     errorCallback.invoke(e.getMessage());
                 }  
             }
@@ -79,20 +79,20 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void logoutCurrentAlias(Callback successCallback, Callback errorCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         pulsateManager.logoutCurrentAlias(new IPulsateRequestListener() {
             @Override
             public void onSucess() {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     successCallback.invoke("Successfully logged out");
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     errorCallback.invoke(e.getMessage());
                 }  
             }
@@ -131,15 +131,15 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     void isPushNotificationEnabled(Callback successCallback, Callback errorCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         if (pulsateManager.isPushNotificationEnabled()) {
-            if (!wasCalled) {
-                wasCalled = true;
+            if (!wasCalled[0]) {
+                wasCalled[0] = true;
                 successCallback.invoke("ENABLED");
             }
         } else {
-            if (!wasCalled) {
-                wasCalled = true;
+            if (!wasCalled[0]) {
+                wasCalled[0] = true;
                 errorCallback.invoke("DISABLED");
             }
         }
@@ -237,12 +237,12 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setUserUnauthorizedListenerAndroid(Callback successCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
             @Override
             public void onUnauthorizedAction() {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     successCallback.invoke("UNAUTHORIZED ACTION");
                 }
             }
@@ -251,12 +251,12 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setUnreadCountUpdateListenerAndroid(Callback successCallback) {
-        boolean wasCalled = false;
+        final boolean[] wasCalled = {false};
         pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {
             @Override
             public void onUnreadCountUpdate(int unread) {
-                if (!wasCalled) {
-                    wasCalled = true;
+                if (!wasCalled[0]) {
+                    wasCalled[0] = true;
                     successCallback.invoke(""+unread);
                 }
             }

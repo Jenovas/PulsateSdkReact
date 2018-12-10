@@ -170,6 +170,11 @@ RCT_EXPORT_METHOD(updateAge:(NSString*)age)
 
 RCT_EXPORT_METHOD(setPrivacy:(NSInteger)privacy)
 {
+    if (privacy == 1) {
+        privacy = 0;
+    } else {
+        privacy = 1;
+    }
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     [manager setPrivacy:privacy];
 }

@@ -249,6 +249,7 @@ RCT_EXPORT_METHOD(setUnreadCountUpdateListenerAndroid:(RCTResponseSenderBlock)su
 
 RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
+    __block BOOL wasCalled = NO;
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
     if ([manager isUserAuthorized]) {
         if (wasCalled == NO) {

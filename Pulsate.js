@@ -46,9 +46,6 @@ export const Pulsate = {
     showLastUnauthorizedMessage: function () {
         RNPulsateSdkReact.showLastUnauthorizedMessage();
     },
-    setUserUnauthorizedListener: function (successCallback: () => string) {
-        RNPulsateSdkReact.setUserUnauthorizedListener(successCallback);
-    },
     updateFirstName: function (firstName: string) {
         RNPulsateSdkReact.updateFirstName(firstName);
     },
@@ -96,6 +93,13 @@ export const Pulsate = {
     },
     showFeed: function () {
         RNPulsateSdkReact.showFeed(); 
+    },
+
+    setUserUnauthorizedListenerAndroid: function (successCallback: () => string) {
+        RNPulsateSdkReact.setUserUnauthorizedListenerAndroid(successCallback);
+    },
+    setUnreadCountUpdateListenerAndroid: function (successCallback: () => string) {
+        RNPulsateSdkReact.setUnreadCountUpdateListenerAndroid(successCallback);
     },
 
     isUserAuthorizedIOS: function (successCallback: () => string, errorCallback: () => string) {

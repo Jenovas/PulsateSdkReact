@@ -126,17 +126,6 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         pulsateManager.showLastUnauthorizedMessage();
     }
 
-
-    @ReactMethod
-    public void setUserUnauthorizedListener(Callback successCallback) {
-        pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
-            @Override
-            public void onUnauthorizedAction() {
-                successCallback.invoke("UNAUTHORIZED ACTION");
-            }
-        });
-    }
-
     @ReactMethod
     public void updateFirstName(String firstName) {
         pulsateManager.updateFirstName(firstName);
@@ -215,5 +204,45 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void showFeed() {
         pulsateManager.showFeed();
+    }
+
+    @ReactMethod
+    public void setUserUnauthorizedListenerAndroid(Callback successCallback) {
+        pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
+            @Override
+            public void onUnauthorizedAction() {
+                successCallback.invoke("UNAUTHORIZED ACTION");
+            }
+        });
+    }
+    
+    @ReactMethod
+    public void setUnreadCountUpdateListenerAndroid(Callback successCallback) {
+        pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {
+            @Override
+            public void onUnreadCountUpdate(int unread) {
+                successCallback.invoke(""+unread);
+            }
+        });
+    }
+
+    @ReactMethod
+    public void isUserAuthorizedIOS(Callback successCallback, Callback errorCallback) {
+    }
+
+    @ReactMethod
+    public void getDeviceGuidIOS(Callback successCallback) {
+    }
+
+    @ReactMethod
+    public void startLocationIOS() {
+    }
+
+    @ReactMethod
+    public void startRemoteNotificationsIOS() {
+    }
+
+    @ReactMethod
+    public void getBadgeCountIOS() {
     }
 }

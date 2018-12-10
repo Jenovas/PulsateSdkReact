@@ -23,7 +23,6 @@ declare module 'react-native-pulsate-sdk-react' {
             isPushNotificationEnabled(successCallback: () => string, errorCallback: () => string): void;
             setUserAuthorized(authorized: boolean): void;
             showLastUnauthorizedMessage(): void;
-            setUserUnauthorizedListener(successCallback: () => string): void;
             updateFirstName(firstName: string): void;
             updateLastName(lastName: string): void;
             updateEmail(email: string): void;
@@ -41,6 +40,9 @@ declare module 'react-native-pulsate-sdk-react' {
             forceAttributeSync(): void;
             showFeed(): void;
 
+            setUserUnauthorizedListenerAndroid(successCallback: () => string): void;
+            setUnreadCountUpdateListenerAndroid(successCallback: () => string): void;
+        
             isUserAuthorizedIOS(successCallback: () => string, errorCallback: () => string): void;
             getDeviceGuidIOS(successCallback: () => string): void;
             startLocationIOS(): void;

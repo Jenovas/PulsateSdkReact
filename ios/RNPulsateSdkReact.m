@@ -230,6 +230,16 @@ RCT_EXPORT_METHOD(showFeed)
     });
 }
 
+RCT_EXPORT_METHOD(setUserUnauthorizedListenerAndroid:(RCTResponseSenderBlock)successCallback)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+}
+
+RCT_EXPORT_METHOD(setUnreadCountUpdateListenerAndroid:(RCTResponseSenderBlock)successCallback)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+}
+
 RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback onError: (RCTResponseSenderBlock)errorCallback)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
@@ -243,6 +253,7 @@ RCT_EXPORT_METHOD(isUserAuthorizedIOS:(RCTResponseSenderBlock)successCallback on
 RCT_EXPORT_METHOD(getDeviceGuidIOS:(RCTResponseSenderBlock)successCallback)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    successCallback([manager getDeviceGuid]);
 }
 
 RCT_EXPORT_METHOD(startLocationIOS)

@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.pulsatehq.external.pulsate.factory.PulsateFactory;
 import com.pulsatehq.external.pulsate.listener.IPulsateRequestListener;
+import com.pulsatehq.external.pulsate.listener.IPulsateUnreadCountUpdateListener;
 import com.pulsatehq.external.pulsate.listener.IPulsateUserUnauthorizedListener;
 import com.pulsatehq.external.pulsate.manager.IPulsateManager;
 import com.pulsatehq.internal.util.AuthorizationData;
@@ -215,7 +216,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
             }
         });
     }
-    
+
     @ReactMethod
     public void setUnreadCountUpdateListenerAndroid(Callback successCallback) {
         pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {

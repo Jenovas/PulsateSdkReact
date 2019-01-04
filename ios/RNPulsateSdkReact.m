@@ -165,7 +165,7 @@ RCT_EXPORT_METHOD(updateGender:(NSInteger)gender)
 RCT_EXPORT_METHOD(updateAge:(NSString*)age)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
-    [manager updateAge:age];
+    [manager updateAge:[age intValue]];
 }
 
 RCT_EXPORT_METHOD(setPrivacy:(NSInteger)privacy)

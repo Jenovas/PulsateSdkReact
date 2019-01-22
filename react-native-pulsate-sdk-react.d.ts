@@ -42,7 +42,8 @@ declare module 'react-native-pulsate-sdk-react' {
 
             setUserUnauthorizedListenerAndroid(successCallback: () => string): void;
             setUnreadCountUpdateListenerAndroid(successCallback: () => string): void;
-        
+            showNetworkAndroid(): void;
+            
             isUserAuthorizedIOS(successCallback: () => string, errorCallback: () => string): void;
             getDeviceGuidIOS(successCallback: () => string): void;
             startLocationIOS(): void;

@@ -101,6 +101,9 @@ export const Pulsate = {
     setUnreadCountUpdateListenerAndroid: function (successCallback: () => string) {
         RNPulsateSdkReact.setUnreadCountUpdateListenerAndroid(successCallback);
     },
+    showNetworkAndroid: function () {
+        RNPulsateSdkReact.showNetworkAndroid(); 
+    },
 
     isUserAuthorizedIOS: function (successCallback: () => string, errorCallback: () => string) {
         RNPulsateSdkReact.isUserAuthorizedIOS(successCallback, errorCallback);

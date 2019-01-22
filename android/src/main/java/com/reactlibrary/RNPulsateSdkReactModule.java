@@ -10,6 +10,7 @@ import com.pulsatehq.external.pulsate.listener.IPulsateUnreadCountUpdateListener
 import com.pulsatehq.external.pulsate.listener.IPulsateUserUnauthorizedListener;
 import com.pulsatehq.external.pulsate.manager.IPulsateManager;
 import com.pulsatehq.internal.util.AuthorizationData;
+import com.pulsatehq.internal.debug.PulsateDebugManager;
 
 import java.util.Date;
 import java.util.List;
@@ -290,6 +291,11 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
                 }
             }
         });
+    }
+
+    @ReactMethod
+    public void showNetworkAndroid() {
+        PulsateDebugManager.getInstance().showNetwork();
     }
 
     @ReactMethod

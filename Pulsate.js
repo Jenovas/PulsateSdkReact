@@ -94,17 +94,25 @@ export const Pulsate = {
     showFeed: function () {
         RNPulsateSdkReact.showFeed(); 
     },
-
-    setUserUnauthorizedListenerAndroid: function (successCallback: () => string) {
-        RNPulsateSdkReact.setUserUnauthorizedListenerAndroid(successCallback);
+    useInitialsForUserAvatar: function (useInitials: boolean) {
+        RNPulsateSdkReact.useInitialsForUserAvatar(useInitials);
     },
-    setUnreadCountUpdateListenerAndroid: function (successCallback: () => string) {
-        RNPulsateSdkReact.setUnreadCountUpdateListenerAndroid(successCallback);
+
+
+    setOnInboxRightButtonClickListenerAndroid: function () {
+        RNPulsateSdkReact.setOnInboxRightButtonClickListenerAndroid();
+    },
+    setUserUnauthorizedListenerAndroid: function () {
+        RNPulsateSdkReact.setUserUnauthorizedListenerAndroid();
+    },
+    setUnreadCountUpdateListenerAndroid: function () {
+        RNPulsateSdkReact.setUnreadCountUpdateListenerAndroid();
     },
     showNetworkAndroid: function () {
         RNPulsateSdkReact.showNetworkAndroid(); 
     },
 
+    
     isUserAuthorizedIOS: function (successCallback: () => string, errorCallback: () => string) {
         RNPulsateSdkReact.isUserAuthorizedIOS(successCallback, errorCallback);
     },

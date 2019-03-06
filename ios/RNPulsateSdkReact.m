@@ -242,12 +242,23 @@ RCT_EXPORT_METHOD(showFeed)
     });
 }
 
-RCT_EXPORT_METHOD(setUserUnauthorizedListenerAndroid:(RCTResponseSenderBlock)successCallback)
+RCT_EXPORT_METHOD(useInitialsForUserAvatar:(BOOL)useInitials)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+    [manager useInitialsForUserAvatar:useInitials];
+}
+
+RCT_EXPORT_METHOD(setOnInboxRightButtonClickListenerAndroid)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
 }
 
-RCT_EXPORT_METHOD(setUnreadCountUpdateListenerAndroid:(RCTResponseSenderBlock)successCallback)
+RCT_EXPORT_METHOD(setUserUnauthorizedListenerAndroid)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+}
+
+RCT_EXPORT_METHOD(setUnreadCountUpdateListenerAndroid)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
 }

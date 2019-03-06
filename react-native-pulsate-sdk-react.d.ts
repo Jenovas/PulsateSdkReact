@@ -39,9 +39,11 @@ declare module 'react-native-pulsate-sdk-react' {
             createEvent(eventName: string): void;
             forceAttributeSync(): void;
             showFeed(): void;
-
-            setUserUnauthorizedListenerAndroid(successCallback: () => string): void;
-            setUnreadCountUpdateListenerAndroid(successCallback: () => string): void;
+            useInitialsForUserAvatar(useInitials: boolean): void;
+        
+            setOnInboxRightButtonClickListenerAndroid(): void;
+            setUserUnauthorizedListenerAndroid(): void;
+            setUnreadCountUpdateListenerAndroid(): void;
             showNetworkAndroid(): void;
             
             isUserAuthorizedIOS(successCallback: () => string, errorCallback: () => string): void;

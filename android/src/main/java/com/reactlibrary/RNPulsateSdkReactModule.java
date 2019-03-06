@@ -4,6 +4,8 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
 import com.pulsatehq.external.pulsate.factory.PulsateFactory;
 import com.pulsatehq.external.pulsate.listener.IPulsateRequestListener;
 import com.pulsatehq.external.pulsate.listener.IPulsateUnreadCountUpdateListener;
@@ -12,6 +14,7 @@ import com.pulsatehq.external.pulsate.manager.IPulsateManager;
 import com.pulsatehq.internal.util.AuthorizationData;
 import com.pulsatehq.internal.debug.PulsateDebugManager;
 
+import android.view.View;
 import java.util.Date;
 import java.util.List;
 
@@ -264,39 +267,75 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setUserUnauthorizedListenerAndroid(Callback successCallback) {
+    public void useInitialsForUserAvatar(boolean useInitials) {
         IPulsateManager pulsateManager = PulsateFactory.getInstance();
-        final boolean[] wasCalled = {false};
-        pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
+        pulsateManager.useInitialsForUserAvatar(useInitials);
+    }
+
+    
+    @ReactMethod
+    public void setOnInboxRightButtonClickListenerAndroid() {
+        IPulsateManager pulsateManager = PulsateFactory.getInstance();
+        pulsateManager.setOnInboxRightButtonClickListener(new View.OnClickListener() {
             @Override
-            public void onUnauthorizedAction() {
-                if (!wasCalled[0]) {
-                    wasCalled[0] = true;
-                    successCallback.invoke("UNAUTHORIZED ACTION");
-                }
+            public void onClick(View v) {
+                onRightButtonClicked();
             }
         });
     }
 
+    private void onRightButtonClicked() {
+        WritableMap payload = Arguments.createMap();
+        payload.putString("onClick", "onClick");
+        this.reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit("onRightButtonClicked", params);
+    }
+
     @ReactMethod
-    public void setUnreadCountUpdateListenerAndroid(Callback successCallback) {
+    public void setUserUnauthorizedListenerAndroid() {
+        IPulsateManager pulsateManager = PulsateFactory.getInstance();
+        pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
+            @Override
+            public void onUnauthorizedAction() {
+                onUnauthorizedAction();
+            }
+        });
+    }
+
+    private void onUnauthorizedAction() {
+        WritableMap payload = Arguments.createMap();
+        payload.putString("onUnauthorizedAction", "onUnauthorizedAction");
+        this.reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit("onUnauthorizedAction", params);
+    }
+
+    @ReactMethod
+    public void setUnreadCountUpdateListenerAndroid() {
         IPulsateManager pulsateManager = PulsateFactory.getInstance();
         final boolean[] wasCalled = {false};
         pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {
             @Override
             public void onUnreadCountUpdate(int unread) {
-                if (!wasCalled[0]) {
-                    wasCalled[0] = true;
-                    successCallback.invoke(""+unread);
-                }
+                onUnreadCountUpdate(unread);
             }
         });
+    }
+
+    private void onUnreadCountUpdate(int unread) {
+        WritableMap payload = Arguments.createMap();
+        payload.putInt("unread", unread);
+        this.reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit("onUnreadCountUpdate", params);
     }
 
     @ReactMethod
     public void showNetworkAndroid() {
         PulsateDebugManager.getInstance().showNetwork();
     }
+
 
     @ReactMethod
     public void isUserAuthorizedIOS(Callback successCallback, Callback errorCallback) {

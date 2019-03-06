@@ -272,7 +272,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         pulsateManager.useInitialsForUserAvatar(useInitials);
     }
 
-    
+
     @ReactMethod
     public void setOnInboxRightButtonClickListenerAndroid() {
         IPulsateManager pulsateManager = PulsateFactory.getInstance();
@@ -289,7 +289,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         payload.putString("onClick", "onClick");
         this.reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onRightButtonClicked", params);
+            .emit("onRightButtonClicked", payload);
     }
 
     @ReactMethod
@@ -308,7 +308,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         payload.putString("onUnauthorizedAction", "onUnauthorizedAction");
         this.reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onUnauthorizedAction", params);
+            .emit("onUnauthorizedAction", payload);
     }
 
     @ReactMethod
@@ -328,7 +328,7 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         payload.putInt("unread", unread);
         this.reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onUnreadCountUpdate", params);
+            .emit("onUnreadCountUpdate", payload);
     }
 
     @ReactMethod

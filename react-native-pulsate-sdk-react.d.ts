@@ -42,6 +42,7 @@ declare module 'react-native-pulsate-sdk-react' {
             useInitialsForUserAvatar(useInitials: boolean): void;
         
             setOnInboxRightButtonClickListenerAndroid(): void;
+            removeOnInboxRightButtonClickListenerAndroid(): void;
             setUserUnauthorizedListenerAndroid(): void;
             setUnreadCountUpdateListenerAndroid(): void;
             showNetworkAndroid(): void;

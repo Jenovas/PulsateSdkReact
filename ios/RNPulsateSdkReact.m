@@ -253,6 +253,11 @@ RCT_EXPORT_METHOD(setOnInboxRightButtonClickListenerAndroid)
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
 }
 
+RCT_EXPORT_METHOD(removeOnInboxRightButtonClickListenerAndroid)
+{
+    PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];
+}
+
 RCT_EXPORT_METHOD(setUserUnauthorizedListenerAndroid)
 {
     PULPulsateManager* manager = [PULPulsateFactory getDefaultInstance];

@@ -102,6 +102,9 @@ export const Pulsate = {
     setOnInboxRightButtonClickListenerAndroid: function () {
         RNPulsateSdkReact.setOnInboxRightButtonClickListenerAndroid();
     },
+    removeOnInboxRightButtonClickListenerAndroid: function () {
+        RNPulsateSdkReact.removeOnInboxRightButtonClickListenerAndroid();
+    },
     setUserUnauthorizedListenerAndroid: function () {
         RNPulsateSdkReact.setUserUnauthorizedListenerAndroid();
     },

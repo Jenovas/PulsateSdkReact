@@ -2,6 +2,7 @@ package com.reactlibrary;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Arguments;
@@ -15,6 +16,7 @@ import com.pulsatehq.external.pulsate.manager.IPulsateManager;
 import com.pulsatehq.internal.util.AuthorizationData;
 import com.pulsatehq.internal.debug.PulsateDebugManager;
 
+import android.os.Handler;
 import android.view.View;
 import java.util.Date;
 import java.util.List;
@@ -274,6 +276,24 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     }
 
 
+    private void sendEvent(ReactContext reactContext, String eventName, WritableMap params) {
+        // this gets the handle to the javascript module associated with the
+        // RCTDeviceEventEmitter's instance in the current context
+        // (i.e. for the currently running app)
+        // then emits an event (a WritableMap is the java equivalent of a js object)
+        Handler mainHandler = new Handler(reactContext.getMainLooper());
+
+        Runnable myRunnable = new Runnable() {
+            @Override 
+            public void run() {
+                reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(eventName, params);
+            }
+        };
+        mainHandler.post(myRunnable);
+    }
+  
     @ReactMethod
     public void setOnInboxRightButtonClickListenerAndroid() {
         IPulsateManager pulsateManager = PulsateFactory.getInstance();
@@ -286,11 +306,15 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     }
 
     private void onRightButtonClicked() {
-        WritableMap payload = Arguments.createMap();
-        payload.putString("onClick", "onClick");
-        this.reactContext
-            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onRightButtonClicked", payload);
+        WritableMap eventMap = Arguments.createMap();
+        eventMap.putString("type", "onRightButtonClicked");
+        sendEvent(getReactApplicationContext(), "onRightButtonClicked", eventMap);
+    }
+
+    @ReactMethod
+    public void removeOnInboxRightButtonClickListenerAndroid() {
+        IPulsateManager pulsateManager = PulsateFactory.getInstance();
+        pulsateManager.setOnInboxRightButtonClickListener(null);
     }
 
     @ReactMethod
@@ -305,11 +329,9 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     }
 
     private void onUnauthorizedAction() {
-        WritableMap payload = Arguments.createMap();
-        payload.putString("onUnauthorizedAction", "onUnauthorizedAction");
-        this.reactContext
-            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onUnauthorizedAction", payload);
+        WritableMap eventMap = Arguments.createMap();
+        eventMap.putString("type", "onUnauthorizedAction");
+        sendEvent(getReactApplicationContext(), "onUnauthorizedAction", eventMap);
     }
 
     @ReactMethod
@@ -325,11 +347,10 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
     }
 
     private void onUnreadCountUpdate(int unread) {
-        WritableMap payload = Arguments.createMap();
-        payload.putInt("unread", unread);
-        this.reactContext
-            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit("onUnreadCountUpdate", payload);
+        WritableMap eventMap = Arguments.createMap();
+        eventMap.putString("type", "onUnreadCountUpdate");
+        eventMap.putInt("unread", unread);
+        sendEvent(getReactApplicationContext(), "onUnreadCountUpdate", eventMap);
     }
 
     @ReactMethod

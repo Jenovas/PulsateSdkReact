@@ -16,7 +16,6 @@ import com.pulsatehq.external.pulsate.manager.IPulsateManager;
 import com.pulsatehq.internal.util.AuthorizationData;
 import com.pulsatehq.internal.debug.PulsateDebugManager;
 
-import android.os.Handler;
 import android.view.View;
 import java.util.Date;
 import java.util.List;
@@ -277,21 +276,9 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
 
 
     private void sendEvent(ReactContext reactContext, String eventName, WritableMap params) {
-        // this gets the handle to the javascript module associated with the
-        // RCTDeviceEventEmitter's instance in the current context
-        // (i.e. for the currently running app)
-        // then emits an event (a WritableMap is the java equivalent of a js object)
-        Handler mainHandler = new Handler(reactContext.getMainLooper());
-
-        Runnable myRunnable = new Runnable() {
-            @Override 
-            public void run() {
-                reactContext
-                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit(eventName, params);
-            }
-        };
-        mainHandler.post(myRunnable);
+        reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit(eventName, params);
     }
   
     @ReactMethod
@@ -323,12 +310,12 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         pulsateManager.setUserUnauthorizedListener(new IPulsateUserUnauthorizedListener() {
             @Override
             public void onUnauthorizedAction() {
-                onUnauthorizedAction();
+                unauthorizedAction();
             }
         });
     }
 
-    private void onUnauthorizedAction() {
+    private void unauthorizedAction() {
         WritableMap eventMap = Arguments.createMap();
         eventMap.putString("type", "onUnauthorizedAction");
         sendEvent(getReactApplicationContext(), "onUnauthorizedAction", eventMap);
@@ -341,12 +328,12 @@ public class RNPulsateSdkReactModule extends ReactContextBaseJavaModule {
         pulsateManager.setUnreadCountUpdateListener(new IPulsateUnreadCountUpdateListener() {
             @Override
             public void onUnreadCountUpdate(int unread) {
-                onUnreadCountUpdate(unread);
+                unreadCountUpdate(unread);
             }
         });
     }
 
-    private void onUnreadCountUpdate(int unread) {
+    private void unreadCountUpdate(int unread) {
         WritableMap eventMap = Arguments.createMap();
         eventMap.putString("type", "onUnreadCountUpdate");
         eventMap.putInt("unread", unread);

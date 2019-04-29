@@ -17,6 +17,7 @@ declare module 'react-native-pulsate-sdk-react' {
             setNewThreadButtonEnabled(buttonEnabled: boolean): void;
             sendLocationWithBeaconEvents(sendLocation: boolean): void;
             setLocationUpdatesEnabled(enabled: boolean): void;
+            setSmallInAppNotificationDuration(duration: int): void;
             setInAppNotificationEnabled(enabled: boolean): void;
             showLastInAppNotification(): void;
             setPushNotificationEnabled(enabled: boolean): void;
